@@ -2,8 +2,7 @@ package lotto.NumbersGenerator.numbersgenerator;
 
 
 import lombok.AllArgsConstructor;
-import pl.lotto.drawdategenerator.DrawDateGeneratorFacade;
-import pl.lotto.drawdategenerator.dto.DrawDateDto;
+import lotto.NumbersGenerator.dtos.DrawDateDto;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -16,13 +15,11 @@ public class NumbersGeneratorFacade {
     private final WinningNumberGenerator winningNumberGenerator;
     private final WinningNumberRepository winningNumberRepository;
 
-    private final DrawDateGeneratorFacade drawDateGeneratorFacade;
 
 
 
-    public WinningNumbersDto generateWinningNumbers() {
+    public WinningNumbersDto generateWinningNumbers(DrawDateDto drawDateDto) {
 
-        DrawDateDto drawDateDto = drawDateGeneratorFacade.generateNextDrawDate(LocalDateTime.now());
 
         if (winningNumberRepository.findByDate(drawDateDto.drawDate()).isPresent()) {
             WinningNumbers winningNumbers = winningNumberRepository.findByDate(drawDateDto.drawDate()).get();
@@ -39,8 +36,8 @@ public class NumbersGeneratorFacade {
     }
 
 
-    public WinningNumbersDto retriveWinningNumbersforDate(LocalDateTime date) {
-        WinningNumbers winningNumbers = winningNumberRepository.findByDate(date).orElseThrow(
+    public WinningNumbersDto retriveWinningNumbersforDate(DrawDateDto drawDateDto) {
+        WinningNumbers winningNumbers = winningNumberRepository.findByDate(drawDateDto.drawDate()).orElseThrow(
                 () -> new WinningNumbersNotFoundException("Winning numbers not found for date"));
         return new WinningNumbersDto(winningNumbers.getWinningNumbers());
     }

@@ -1,27 +1,25 @@
 package lotto.NumbersGenerator.numbersgenerator;
 
 
-package pl.lotto.numbersgenerator;
 
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.lotto.drawdategenerator.DrawDateGeneratorFacade;
 
 @Configuration
 public class NumbersGeneratorConfiguration {
 
 
     @Bean
-    public  NumbersGeneratorFacade numbersGeneratorFacade(WinningNumberRepository winningNumberRepository, DrawDateGeneratorFacade drawDateGeneratorFacade){
+    public  NumbersGeneratorFacade numbersGeneratorFacade(WinningNumberRepository winningNumberRepository){
         WinningNumberGenerator winningNumberGenerator = new WinningNumberGenerator();
 
-        return new NumbersGeneratorFacade(winningNumberGenerator,winningNumberRepository,drawDateGeneratorFacade);
+        return new NumbersGeneratorFacade(winningNumberGenerator,winningNumberRepository);
     }
 
-    public NumbersGeneratorFacade numbersGeneratorFacadeForTest(WinningNumberRepository winningNumberRepository, DrawDateGeneratorFacade drawDateGeneratorFacade){
+    public NumbersGeneratorFacade numbersGeneratorFacadeForTest(WinningNumberRepository winningNumberRepository){
         WinningNumberGenerator winningNumberGenerator = new WinningNumberGenerator();
-        return  new NumbersGeneratorFacade(winningNumberGenerator,winningNumberRepository,drawDateGeneratorFacade);
+        return  new NumbersGeneratorFacade(winningNumberGenerator,winningNumberRepository);
     }
 
 

@@ -1,4 +1,6 @@
 package lotto.NumbersGenerator.dtos;
 
-public class DrawDateDto {
+import java.time.LocalDateTime;
+
+public record DrawDateDto(LocalDateTime drawDate) {
 }
